@@ -10,6 +10,8 @@ Python 3
 """
 
 # ----------------------------- logging --------------------------
+from math import factorial
+from typing import Callable
 import logging
 from sys import stdout
 from datetime import datetime
@@ -24,7 +26,6 @@ logging.info(datetime.now())
 
 
 # ----------------------------- #### --------------------------
-from typing import Callable
 
 
 # ####################################################################
@@ -75,7 +76,6 @@ def ODE_euler(
 
 
 # ####################################################################
-from math import factorial
 
 
 def ODE_euler_nth(
