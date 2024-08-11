@@ -45,31 +45,32 @@ solution_B = euler_method(
     nanodrone_model, initial_conditions_B, t, args=(alpha, beta, gamma))
 
 # Configuración de la figura y el eje para la animación
-fig = plt.figure(facecolor='lavender')
-ax = fig.add_subplot(111, projection='3d')
+fig = plt.figure(facecolor='white')
+ax = fig.add_subplot(111, projection='3d', facecolor='white')
 ax.set_xlim(min(solution_A[:, 0].min(), solution_B[:, 0].min()), max(
     solution_A[:, 0].max(), solution_B[:, 0].max()))
 ax.set_ylim(min(solution_A[:, 1].min(), solution_B[:, 1].min()), max(
     solution_A[:, 1].max(), solution_B[:, 1].max()))
 ax.set_zlim(min(solution_A[:, 2].min(), solution_B[:, 2].min()), max(
     solution_A[:, 2].max(), solution_B[:, 2].max()))
-ax.set_xlabel('X', fontsize=12, color='darkblue')
-ax.set_ylabel('Y', fontsize=12, color='darkgreen')
-ax.set_zlabel('Z', fontsize=12, color='darkred')
-ax.set_title('Trayectoria del Nanodron', fontsize=14,
-             fontweight='bold', color='navy')
+ax.set_xlabel('X', fontsize=14, color='darkblue')
+ax.set_ylabel('Y', fontsize=14, color='darkblue')
+ax.set_zlabel('Z', fontsize=14, color='darkblue')
+ax.set_title('Trayectoria del Nanodron', fontsize=16,
+             fontweight='bold', color='darkblue')
 
 # Inicialización de las líneas para las trayectorias
 line_A, = ax.plot([], [], [], label='Posición A inicial',
-                  color='orange', linewidth=2)
+                  color='orange', linewidth=2, linestyle='--')
 line_B, = ax.plot([], [], [], label='Posición B inicial',
-                  color='purple', linewidth=2)
-ax.legend()
+                  color='green', linewidth=2, linestyle='-.')
+
+ax.legend(facecolor='lightgray', edgecolor='black', fontsize=12)
 
 # Indicador del tiempo transcurrido
 time_template = 'Tiempo = %.1f s'
 time_text = ax.text2D(0.05, 0.95, '', transform=ax.transAxes,
-                      fontsize=12, color='maroon')
+                      fontsize=14, color='darkred', backgroundcolor='lightgray')
 
 # Función de inicialización para la animación
 
@@ -97,5 +98,11 @@ def update(num):
 # Creación de la animación
 ani = FuncAnimation(fig, update, frames=len(
     t), init_func=init, blit=True, interval=10, repeat=False)
+
+# Cambiar estilo de la cuadricula y el fondo
+ax.grid(color='gray', linestyle='-', linewidth=0.5, alpha=0.7)
+ax.xaxis.set_tick_params(colors='black')
+ax.yaxis.set_tick_params(colors='black')
+ax.zaxis.set_tick_params(colors='black')
 
 plt.show()
